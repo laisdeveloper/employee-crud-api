@@ -2,16 +2,32 @@
   "name": "employee-crud-api",
   "version": "1.0.0",
   "description": "Aplicação CRUD API em Node.js que alimentara frameworks Front, como o Angular.",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon",
+    "lint": "eslint --ext .js -f ./node_modules/eslint-friendly-formatter . --fix",
+    "prepush": "npm run lint",
+    "start": "node server.js"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "nodejs",
+    "api",
+    "crud",
+    "azure-functions",
+    "express",
+    "github-actions",
+    "swa",
+    "serverless",
+    "azure",
+    "javascript",
+    "sql",
+    "postgresql"
+  ],
+  "author": "Lais Coutinho <@laisdev - Linkedin>",
   "license": "ISC",
   "devDependencies": {
     "@eslint/js": "^9.17.0",
-    "eslint": "^9.17.0", 
+    "eslint": "^9.17.0",
     "globals": "^15.14.0",
     "husky": "^9.1.7",
     "nodemon": "^3.1.9"
@@ -19,6 +35,7 @@
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
+    "eslint-friendly-formatter": "^4.0.1",
     "express": "^4.21.2",
     "express-promise-router": "^4.1.1",
     "pg": "^8.13.1"
