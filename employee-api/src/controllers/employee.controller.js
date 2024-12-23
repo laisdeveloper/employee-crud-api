@@ -21,3 +21,9 @@ exports.createEmployee = async (req, res) => {
         },
       })
 }
+
+//me todo que lista todos os employees
+exports.listAllEmployees = async(rewq, res) => {
+    const response = await db.query('SELECT * FROM employee ORDER BY name ASC')
+    res.status(200).send(response.rows)
+}
