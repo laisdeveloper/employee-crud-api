@@ -27,3 +27,11 @@ exports.listAllEmployees = async(rewq, res) => {
     const response = await db.query('SELECT * FROM employee ORDER BY name ASC')
     res.status(200).send(response.rows)
 }
+
+//metodo que lista determiando employee por if
+exports.findEmployeeByID = async(req, res) => {
+    const employeeID = req.params.id // transforma porque pode vir de um body json
+    const response = await db.query('SELECT * FROM employee WHERE employee_id = $1', [employeeID]) //await porque esta esperando uma query
+    // o $1 serve para armanzena uma variavel dentro do sql
+    res.status(200).send(response.rows)
+}
