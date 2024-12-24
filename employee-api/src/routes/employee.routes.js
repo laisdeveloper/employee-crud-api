@@ -18,4 +18,7 @@ router.get('/employees', employeeController.listAllEmployees)
 // rota repsonsavel pór lista um determinado colavorador por id : GET : localhost:300/api/employees/id
 router.get('/employees/:id', employeeController.findEmployeeByID)
 
+// rota responsavel por atualizar um determinado colaborado por ID : PUT : localhost:300/api/employees/id
+router.put('/employees/:id', employeeController.updateEmployeeByID)
+
 module.exports = router
