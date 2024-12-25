@@ -6,10 +6,10 @@ import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
+import { EmployeeService } from './employee.service';
 
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
-
 
 registerLocaleData(ptBr, 'pt-BR');
 
@@ -20,6 +20,7 @@ export const appConfig: ApplicationConfig = {
     provideClientHydration(withEventReplay()),
     CommonModule,
     ReactiveFormsModule,
+    EmployeeService,
     HttpClientModule,
     {
       provide: LOCALE_ID,
