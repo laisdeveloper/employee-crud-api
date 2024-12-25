@@ -9,18 +9,12 @@ import { NavigationCancel, Event, NavigationEnd, NavigationError, NavigationStar
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-/**
-   *
-   */
+
 export class AppComponent {
   title = 'front-angular';
-  private loadingRef;
-
 
   // construtor reponsavel por trabalhar com a questao da loading bar ba aplicacao
   constructor(private router: Router , private loadingBar: LoadingBarService) {
-    this.loadingRef = this.loadingBar.useRef();
-
     this.router.events.subscribe((event: Event) => {
       this.navigationInterceptor(event)
     })
@@ -29,16 +23,16 @@ export class AppComponent {
 // metodo responsavel por tratar as condicionais em relacao ao loading bar
   private navigationInterceptor(event: Event): void {
     if(event instanceof NavigationStart) {
-      this.loadingRef.start()
+      this.loadingBar.useRef().start()
     }
     if(event instanceof NavigationEnd){
-      this.loadingRef.complete()
+      this.loadingBar.useRef().complete()
     }
     if(event instanceof NavigationCancel){
-      this.loadingRef.stop()
+      this.loadingBar.useRef().stop()
     }
     if(event instanceof NavigationError){
-      this.loadingRef.stop()
+      this.loadingBar.useRef().stop()
     }
 
   }
