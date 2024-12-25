@@ -1,10 +1,17 @@
-import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
+import { ApplicationConfig, LOCALE_ID, provideZoneChangeDetection } from '@angular/core';
+import ptBr from '@angular/common/locales/br';
+import { registerLocaleData } from '@angular/common';
+
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
+
+
+registerLocaleData(ptBr, 'pt-BR');
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -12,6 +19,11 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideClientHydration(withEventReplay()),
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule,
+    {
+      provide: LOCALE_ID,
+      useValue: 'pt-BR'
+    }
   ]
 };
