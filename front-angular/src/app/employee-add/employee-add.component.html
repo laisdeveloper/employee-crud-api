@@ -62,8 +62,12 @@
       </div>
       <!-- FIM BLOCO: Employee Registration -->
 
+<!-- (click)="createNewEmployee(name.value, job_role.value, salary.value, birth.value,employee_registration.value)"> -->
       <div class="form-group">
-        <button class="btn btn-primary" type="submit" [disabled]="employeeForm.pristine || employeeForm.invalid">
+        <button class="btn btn-primary"
+                type="submit"
+                [disabled]="employeeForm.pristine || employeeForm.invalid" >
+
           <ng-container *ngIf="!employee_id">
             <fa-icon [icon]="icons.faUserPlus"></fa-icon> Register Employee
           </ng-container>
@@ -73,6 +77,7 @@
           </ng-container>
         </button>
       </div>
+
     </form>
   </div>
 </div>

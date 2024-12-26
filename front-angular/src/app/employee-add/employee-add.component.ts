@@ -5,13 +5,16 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faUserPlus, faUserEdit } from '@fortawesome/free-solid-svg-icons';
 import { ReactiveFormsModule } from '@angular/forms';
+import { EmployeeService } from '../employee.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-employee-add',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, FontAwesomeModule ],
+  imports: [ReactiveFormsModule, CommonModule, FontAwesomeModule, HttpClientModule  ],
   templateUrl: './employee-add.component.html',
-  styleUrl: './employee-add.component.css'
+  styleUrl: './employee-add.component.css',
+  providers: [EmployeeService]
 })
 
 export class EmployeeAddComponent implements OnInit {
@@ -21,10 +24,14 @@ export class EmployeeAddComponent implements OnInit {
     faUserEdit
   };
 
-  employeeForm: FormGroup;
+  employeeForm!: FormGroup;
   employee_id?: number; // Declarando como opcional
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private employeeService: EmployeeService) {
+    this.createForm();
+  }
+
+  createForm(): void {
     this.employeeForm = this.formBuilder.group({
       name: ['', Validators.required],
       job_role: ['', Validators.required],
@@ -32,6 +39,10 @@ export class EmployeeAddComponent implements OnInit {
       birth: ['', Validators.required],
       employee_registration: ['', Validators.required],
     });
+  }
+
+  createNewEmployee(name: string, job_role: string, salary: number, birth: Date, employee_registration: number){
+    this.employeeService.createNewEmployee(name, job_role, salary, birth, employee_registration);
   }
 
   ngOnInit(): void {
@@ -43,12 +54,24 @@ export class EmployeeAddComponent implements OnInit {
   }
 
   onSubmit() {
-    if (!this.employee_id) {
-      console.log('Create new employee');
-      // Lógica para criar novo empregado
+    if (this.employeeForm.valid) {
+      const formData = this.employeeForm.value;
+
+      if (!this.employee_id) {
+        console.log('Creating new employee...', formData);
+        this.employeeService.createNewEmployee(
+          formData.name,
+          formData.job_role,
+          formData.salary,
+          formData.birth,
+          formData.employee_registration
+        );
+      } else {
+        console.log('Updating employee...', formData);
+        // Adicione lógica para atualizar funcionário aqui
+      }
     } else {
-      console.log('Update employee');
-      // Lógica para atualizar empregado
+      console.log('Form is invalid');
     }
   }
 }
