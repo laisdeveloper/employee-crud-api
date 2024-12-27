@@ -24,25 +24,30 @@ exports.createEmployee = async (req, res) => {
 
 //me todo que lista todos os employees
 exports.listAllEmployees = async(rewq, res) => {
-    const response = await db.query(`
-        SELECT 
-            employee_id, 
-            name, 
-            job_role, 
-            salary, 
-            birth, 
-            employee_registration, 
-            to_char(birth, 'yyyy-MM-dd') as birth
-        FROM employee 
-        ORDER BY name ASC
-    `);
+    const response = await db.query(`SELECT  
+                                        name, 
+                                        job_role, 
+                                        salary, 
+                                        birth, 
+                                        employee_registration, 
+                                        to_char(birth, 'yyyy-MM-dd') as birth
+                                    FROM employee 
+                                    ORDER BY name ASC
+                                `)
     res.status(200).send(response.rows)
 }
 
 //metodo que lista determiando employee por if
 exports.findEmployeeByID = async(req, res) => {
     const employeeID = req.params.id // transforma porque pode vir de um body json
-    const response = await db.query('SELECT * FROM employee WHERE employee_id = $1', [employeeID]) //await porque esta esperando uma query
+    const response = await db.query(`SELECT 
+                                        name, 
+                                        job_role, 
+                                        salary, 
+                                        birth, 
+                                        employee_registration, 
+                                        to_char(birth, 'yyyy-MM-dd') as birth
+                                        FROM employee WHERE employee_id = $1`, [employeeID]) //await porque esta esperando uma query
     // o $1 serve para armanzena uma variavel dentro do sql
     res.status(200).send(response.rows)
 }
