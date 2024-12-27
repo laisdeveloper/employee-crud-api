@@ -7,6 +7,7 @@ import { faUserPlus, faUserEdit } from '@fortawesome/free-solid-svg-icons';
 import { ReactiveFormsModule } from '@angular/forms';
 import { EmployeeService } from '../employee.service';
 import { HttpClientModule } from '@angular/common/http';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-employee-add',
@@ -41,17 +42,25 @@ export class EmployeeAddComponent implements OnInit {
     });
   }
 
+  // metodo responsavel por adicionar um novo employee - acao do botao
   createNewEmployee(name: string, job_role: string, salary: number, birth: Date, employee_registration: number){
     this.employeeService.createNewEmployee(name, job_role, salary, birth, employee_registration);
+
+    Swal.fire({
+      title: 'Employee added sucessfully!',
+      icon: 'success',
+      showConfirmButton: true,
+      timer: 1500
+    });
+
+    this.employeeForm.reset();
   }
 
   ngOnInit(): void {
     this.checkParam();
   }
 
-  checkParam() {
-
-  }
+  checkParam() {}
 
   onSubmit() {
     if (this.employeeForm.valid) {

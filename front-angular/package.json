@@ -22,6 +22,7 @@
     "@angular/router": "^19.0.0",
     "@angular/ssr": "^19.0.5",
     "@fortawesome/angular-fontawesome": "^1.0.0",
+    "@fortawesome/fontawesome-svg-core": "^6.7.2",
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
     "@ngx-loading-bar/core": "^7.0.0",
     "@ngx-loading-bar/router": "^7.0.0",

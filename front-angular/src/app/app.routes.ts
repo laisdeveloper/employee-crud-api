@@ -3,12 +3,12 @@ import { Routes, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 import { ReactiveFormsModule } from '@angular/forms';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 
 import { EmployeeAddComponent } from './employee-add/employee-add.component';
 import { EmployeeEditComponent } from './employee-edit/employee-edit.component';
 import { EmployeeGetComponent } from './employee-get/employee-get.component';
-import { AppComponent } from './app.component';
+import { faUserPlus, faTrash, faEdit } from '@fortawesome/free-solid-svg-icons';
 
 export const routes: Routes = [
   { path: '', component: EmployeeGetComponent }, // Página inicial (ajustado para um componente de lista)
@@ -26,6 +26,11 @@ export const routes: Routes = [
   ],
   exports: [RouterModule
   ],
-  declarations: [] // Não precisa declarar os componentes standalone aqui
+  declarations: []
 })
-export class AppRoutingModule { }
+
+export class AppRoutingModule {
+  constructor(library: FaIconLibrary) {
+    library.addIcons(faUserPlus, faTrash, faEdit);
+  }
+ }

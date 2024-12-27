@@ -6,6 +6,8 @@
 
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import Employee from './Employee';
 
 @Injectable({
   providedIn: 'root'
@@ -34,5 +36,13 @@ export class EmployeeService {
       .http
       .post(`${this.uri}/employees`, employee)
       .subscribe(res => console.log('Done'));
+   }
+
+   // metodo responsavel por listar todos os employee
+   getEmployees(): Observable<Employee[]> {
+    // GET - url no back-end - localhost:3000/api/employees
+    return this
+      .http
+      .get<Employee[]>(`${this.uri}/employees`);
    }
 }
